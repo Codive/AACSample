@@ -10,7 +10,13 @@ interface SampleTableDao {
     fun get(id: Long): SampleEntity?
 
     @Query("SELECT * from sample_table ORDER BY id DESC")
-    fun getAll(): LiveData<List<SampleEntity>>
+    fun getAll(): List<SampleEntity>
+
+    @Query("SELECT * from sample_table ORDER BY id DESC")
+    fun getAllLiveData(): LiveData<List<SampleEntity>>
+
+    @Query("SELECT count(id) from sample_table")
+    fun count(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE) //衝突した場合は上書き
     fun insert(itemEntity: SampleEntity): Long

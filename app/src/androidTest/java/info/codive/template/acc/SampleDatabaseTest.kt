@@ -1,11 +1,13 @@
 package info.codive.template.acc
 
+import android.content.Context
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import info.codive.template.acc.model.data.SampleEntity
 import info.codive.template.acc.model.database.SampleDatabase
 import info.codive.template.acc.model.database.SampleTableDao
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.After
 import org.junit.Before
@@ -20,7 +22,7 @@ import java.io.IOException
  * adding the UI.
  */
 
-@RunWith(AndroidJUnit4::class)
+// @RunWith(AndroidJUnit4::class)
 class SampleDatabaseTest {
 
     private lateinit var sampleTableDao: SampleTableDao
@@ -46,11 +48,19 @@ class SampleDatabaseTest {
 
     @Test
     @Throws(Exception::class)
-    fun insertAndGetNight() {
+    fun insertAndGetSampleEntity() {
         val sampleEntity = SampleEntity()
-        sampleTableDao.insert(sampleEntity)
-        val sample = sampleTableDao.get(0)
-        assertEquals(sample?.message, "sample")
+        val inserted = sampleTableDao.insert(sampleEntity)
+        assertEquals(1, inserted)
+
+        val sample = sampleTableDao.get(1)
+        assertEquals("sample", sample?.message)
+
+        val count = sampleTableDao.count()
+        assertEquals(1, count)
+
+        val list = sampleTableDao.getAll()
+        assertEquals(1, list.size)
     }
 }
 

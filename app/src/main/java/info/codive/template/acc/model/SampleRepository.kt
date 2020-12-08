@@ -8,6 +8,6 @@ class SampleRepository(
     private val mDao: SampleTableDao
 ) {
     fun getAll(): LiveData<List<SampleEntity>> {
-        return mDao.getAll()
+        return mDao.getAllLiveData()
     }
 }
