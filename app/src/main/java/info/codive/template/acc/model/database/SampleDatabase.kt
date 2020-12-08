@@ -1,6 +1,7 @@
 package info.codive.template.acc.model.database
 
 import android.content.Context
+import android.net.Uri
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -56,6 +57,16 @@ abstract class SampleDatabase : RoomDatabase() {
                     )
                 )
             }
+        }
+
+        /**
+         * コルーチンやスレッドを使いDao経由で初期化することも可能
+         */
+        fun initData(sampleTableDao: SampleTableDao) {
+            sampleTableDao.deleteAll()
+            sampleTableDao.insert(SampleEntity(0, "message1", Uri.EMPTY, Date(), Date()))
+            sampleTableDao.insert(SampleEntity(0, "message2", Uri.EMPTY, Date(), Date()))
+            sampleTableDao.insert(SampleEntity(0, "message3", Uri.EMPTY, Date(), Date()))
         }
     }
 }

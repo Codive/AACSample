@@ -17,4 +17,7 @@ data class SampleEntity(
     var updateDate: Date = Date(),
     @ColumnInfo(name = "create_date")
     var createDate: Date = Date(),
+
+//    @Ignore //Ignoreを使う場合は全て初期化するか、コンストラクターを書く必要がある
+//    var isActive: Boolean = false,
 )
